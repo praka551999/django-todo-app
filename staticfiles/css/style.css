@@ -2,6 +2,15 @@
   margin-top: 30px;
 }
 
+.user-info {
+  display: flex;
+  align-items: center;
+}
+
+.user-info span {
+  font-size: 0.9em;
+}
+
 .fa-trash-alt {
   color: red;
   float: right;
@@ -85,4 +94,49 @@
 
 .todo-complete.todo-item-upcoming {
   background-color: #d4edda;
+}
+
+/* Alert styling */
+.alert {
+  margin-bottom: 20px;
+}
+
+.alert-dismissible .close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 2;
+  padding: 0.75rem 1.25rem;
+  color: inherit;
+}
+
+/* Authentication form styling */
+.card {
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card-title {
+  color: #333;
+  font-weight: 600;
+}
+
+.form-group input {
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  padding: 10px 12px;
+  font-size: 16px;
+  transition: border-color 0.15s ease-in-out;
+}
+
+.form-group input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.btn-block {
+  border-radius: 5px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
