@@ -16,3 +16,73 @@
   cursor: pointer;
   margin-right: 10px;
 }
+
+/* Filter dropdown styling */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  font-weight: 600;
+  color: #495057;
+  margin-bottom: 8px;
+}
+
+#filter-select {
+  max-width: 200px;
+  border: 2px solid #e9ecef;
+  border-radius: 5px;
+  padding: 8px 12px;
+  background-color: #fff;
+  transition: border-color 0.15s ease-in-out;
+}
+
+#filter-select:focus {
+  border-color: #007bff;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* Due date styling */
+.todo-due-date {
+  font-size: 0.9em;
+  margin-left: 15px;
+  font-style: italic;
+}
+
+.todo-title {
+  font-weight: 500;
+}
+
+/* Due date color coding */
+.todo-item-overdue {
+  border-left: 4px solid #dc3545 !important;
+  background-color: #f8d7da;
+}
+
+.todo-item-due-today {
+  border-left: 4px solid #fd7e14 !important;
+  background-color: #fff3cd;
+}
+
+.todo-item-upcoming {
+  border-left: 4px solid #28a745 !important;
+  background-color: #d4edda;
+}
+
+.todo-item-no-due-date {
+  border-left: 4px solid #6c757d !important;
+}
+
+/* Override completed styling to maintain due date colors */
+.todo-complete.todo-item-overdue {
+  background-color: #f8d7da;
+}
+
+.todo-complete.todo-item-due-today {
+  background-color: #fff3cd;
+}
+
+.todo-complete.todo-item-upcoming {
+  background-color: #d4edda;
+}

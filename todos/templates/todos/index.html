@@ -24,10 +24,13 @@
       <form method="post" action="{% url 'todos:add' %}">
         {% csrf_token %}
         <div class="form-row">
-          <div class="col-md-6">
+          <div class="col-md-4">
             <input type="text" class="form-control" name="title" placeholder="Do laundry" required>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-4">
+            <input type="date" class="form-control" name="due_date" placeholder="Due Date">
+          </div>
+          <div class="col-md-4">
             <button type="submit" name="submit" class="btn btn-outline-primary">
               Add
             </button>
@@ -38,19 +41,37 @@
   </div>
   <hr />
 
+  <!-- Filter row -->
+  <div class="row">
+    <div class="offset-md-2 col-lg-8">
+      <div class="form-group">
+        <label for="filter-select">Filter Tasks:</label>
+        <select class="form-control" id="filter-select" onchange="filterTasks(this.value)">
+          <option value="all" {% if filter_type == 'all' %}selected{% endif %}>All Tasks</option>
+          <option value="overdue" {% if filter_type == 'overdue' %}selected{% endif %}>Overdue</option>
+          <option value="due-today" {% if filter_type == 'due-today' %}selected{% endif %}>Due Today</option>
+          <option value="upcoming" {% if filter_type == 'upcoming' %}selected{% endif %}>Upcoming</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
   <!-- todo list row -->
   <div class="row">
-    <div class="offset-md-2 col-lg-6">
+    <div class="offset-md-2 col-lg-8">
       <div class="list-group">
         {% for todo in todo_list %}
-        <div class="list-group-item {% if todo.isCompleted %} todo-complete {% endif %}">
+        <div class="list-group-item {% if todo.isCompleted %} todo-complete {% endif %} todo-item-{{ todo.get_due_status }}">
           <form style="display: inline;" method="post" action="{% url 'todos:update' todo.id %}">
             {% csrf_token %}
             <input type="checkbox" name="isCompleted" onchange="this.form.submit()" {% if todo.isCompleted %} checked
               {% endif %} class="todo-status-checkbox"
               title="{% if not todo.isCompleted %} mark as done {% else %} mark undone {% endif %}">
           </form>
-          {{ todo.title }}
+          <span class="todo-title">{{ todo.title }}</span>
+          {% if todo.due_date %}
+            <span class="todo-due-date">Due: {{ todo.due_date|date:"M d, Y" }}</span>
+          {% endif %}
           <a href="{% url 'todos:delete' todo.id %}" title="Delete">
             <i class="far fa-trash-alt"></i>
           </a>
@@ -60,5 +81,11 @@
     </div>
   </div>
 </div>
+
+<script>
+function filterTasks(filterType) {
+    window.location.href = "{% url 'todos:index' %}?filter=" + filterType;
+}
+</script>
 
 {% endblock %}
